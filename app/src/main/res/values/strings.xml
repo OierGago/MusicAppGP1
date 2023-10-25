@@ -5,6 +5,8 @@
     <string name="autor">AUTOR</string>
     <string name="titulo">TITULO</string>
     <string name="favorito">FAVORITOS</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTRAR</string>
 
 
 </resources>

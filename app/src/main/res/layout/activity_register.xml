@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
@@ -29,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/LastName" />
 
     <EditText
@@ -42,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/FirstName" />
 
     <EditText
@@ -55,6 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
@@ -68,6 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/Email" />
 
     <EditText
@@ -81,6 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/stylo_borde_editext"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
 
     <ImageView
@@ -90,7 +96,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TituloRegister" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sin_t_tulo"
+        app:layout_constraintVertical_bias="0.185" />
 
     <Button
         android:id="@+id/Register"
