@@ -89,7 +89,6 @@
         android:layout_height="245dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TituloRegister" />
 
@@ -121,7 +120,6 @@
         android:id="@+id/TituloRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="Register"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
