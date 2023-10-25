@@ -9,38 +9,41 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_red_dark"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/toolbar3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="58dp"
+        android:layout_marginBottom="1dp"
         android:background="@android:color/holo_red_dark"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/songListRecicledView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <Button
-        android:id="@+id/byAuthor"
+        android:id="@+id/btnFavorito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#BC0000"
-        android:text="@string/favorito"
+        android:text="@string/listaCanciones"
         app:cornerRadius="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songListRecicledView" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -56,7 +59,7 @@
     <EditText
         android:id="@+id/search"
         android:layout_width="208dp"
-        android:layout_height="36dp"
+        android:layout_height="48dp"
         android:background="@drawable/stylo_borde_editext"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
@@ -78,15 +81,6 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/songListRecicledView"
-        android:layout_width="411dp"
-        android:layout_height="553dp"
-        app:layout_constraintBottom_toTopOf="@+id/byAuthor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="43dp"
@@ -101,22 +95,22 @@
     <Button
         android:id="@+id/byTitle"
         android:layout_width="104dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:backgroundTint="#800000"
         android:fontFamily="@font/inter_medium"
         android:text="Titulo"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
         app:layout_constraintEnd_toEndOf="@+id/toolbar3"
-        app:layout_constraintEnd_toStartOf="@+id/byAuthor"
+        app:layout_constraintEnd_toStartOf="@+id/btnAutor"
         app:layout_constraintHorizontal_bias="0.23"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
     <Button
-        android:id="@+id/byAuthor"
+        android:id="@+id/btnAutor"
         android:layout_width="104dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:backgroundTint="#800000"
         android:text="Autores"
         app:cornerRadius="10dp"
@@ -124,5 +118,44 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbar3"
         app:layout_constraintStart_toStartOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_dark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="411dp"
+        android:layout_height="45dp"
+        android:text="@string/favorito"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/toolbar5"
+        app:layout_constraintTop_toTopOf="@+id/toolbar5"
+        app:layout_constraintVertical_bias="0.842" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="413dp"
+        android:layout_height="444dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAutor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
