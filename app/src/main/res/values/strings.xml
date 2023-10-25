@@ -1,8 +1,10 @@
 <resources>
+
     <string name="app_name">AppMusicGrupo1</string>
     <string name="listaCanciones">LISTA CACIONES</string>
     <string name="autor">AUTOR</string>
     <string name="titulo">TITULO</string>
+    <string name="favorito">FAVORITOS</string>
 
 
 </resources>

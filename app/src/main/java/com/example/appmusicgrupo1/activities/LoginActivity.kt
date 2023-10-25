@@ -7,6 +7,6 @@ import com.example.appmusicgrupo1.R
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.music_list_activity)
+        setContentView(R.layout.music_list)
     }
 }
