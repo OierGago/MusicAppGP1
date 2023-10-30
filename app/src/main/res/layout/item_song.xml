@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/item_disc_img"
+            android:id="@+id/songImage"
             android:layout_width="84dp"
             android:layout_height="74dp"
             android:layout_marginLeft="15dp"
@@ -35,7 +35,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_song_title"
+                android:id="@+id/songTitle"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:fontFamily="@font/inter_medium"
@@ -46,7 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/item_song_autor"
+                android:id="@+id/songAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
                 android:layout_marginVertical="5dp"
@@ -56,7 +56,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/item_youtube"
+            android:id="@+id/youtube"
             android:layout_width="41dp"
             android:layout_height="44dp"
             android:layout_marginTop="18dp"
@@ -66,7 +66,7 @@
             app:srcCompat="@drawable/youtube_logo" />
 
         <ImageView
-            android:id="@+id/item_favorito"
+            android:id="@+id/songFavorite"
             android:layout_width="42dp"
             android:layout_height="40dp"
             android:layout_marginTop="18dp"
