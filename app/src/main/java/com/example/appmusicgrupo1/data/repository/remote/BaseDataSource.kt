@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.appmusicgrupo1.utils.Resource
 import retrofit2.Response
 
-open class BaseDataSource {
+abstract class BaseDataSource {
 
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
