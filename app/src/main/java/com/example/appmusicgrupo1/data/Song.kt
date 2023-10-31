@@ -9,5 +9,4 @@ data class Song(
     val title: String,
     val author: String,
     val url: String,
-    val image: String
 ): Parcelable

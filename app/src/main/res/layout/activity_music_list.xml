@@ -155,6 +155,7 @@
         android:layout_height="444dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAutor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
