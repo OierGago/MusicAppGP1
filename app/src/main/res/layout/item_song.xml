@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/item_frame"
         android:layout_width="408dp"
         android:layout_height="90dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/songImage"
@@ -24,7 +14,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/sin_t_tulo" />
+            android:src="@drawable/sin_t_tulo" />
 
         <LinearLayout
             android:layout_width="180dp"
@@ -63,7 +53,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/youtube_logo" />
+            android:src="@drawable/youtube_logo" />
 
         <ImageView
             android:id="@+id/songFavorite"
@@ -72,6 +62,5 @@
             android:layout_marginTop="18dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/heart_coraz_n_svg" />
+            android:src="@drawable/heart_coraz_n_svg" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>

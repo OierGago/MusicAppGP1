@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:srcCompat="@drawable/_56212" />
+        android:src="@drawable/_56212" />
 
     <EditText
         android:id="@+id/search"
@@ -90,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="@drawable/sin_t_tulo" />
+        android:src="@drawable/sin_t_tulo" />
 
     <Button
         android:id="@+id/byTitle"

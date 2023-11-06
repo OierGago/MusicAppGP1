@@ -1,5 +1,6 @@
 package com.example.appmusicgrupo1.ui.songList
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.databinding.ItemSongBinding
+import com.squareup.picasso.Picasso
 
 class SongAdapter (): ListAdapter<Song, SongAdapter.SongViewHolder>(SongDiffCallback()){
 
@@ -25,6 +27,12 @@ class SongAdapter (): ListAdapter<Song, SongAdapter.SongViewHolder>(SongDiffCall
                 fun bind(song: Song){
                     binding.songTitle.text = song.titulo
                     binding.songAuthor.text = song.autor
+                    val thumbnailUrl = song.imagen
+                    Log.i("Prueba", "" + thumbnailUrl)
+                    Picasso
+                        .get()
+                        .load(thumbnailUrl)
+                        .into(binding.songImage)
                 }
         }
     class SongDiffCallback: DiffUtil.ItemCallback<Song>() {
