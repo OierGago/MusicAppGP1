@@ -42,12 +42,14 @@ class SongViewModel(
         viewModelScope.launch {
             val repoResponse = getSongFromRepository();
             _items.value = repoResponse
+            Log.i("pruebas", _items.value.toString())
         }
     }
 
     suspend fun getSongFromRepository() : Resource<List<Song>>{
         return withContext(Dispatchers.IO){
             songRepository.getSongs()
+
         }
     }
 

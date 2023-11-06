@@ -6,7 +6,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Song(
     val id: Int,
-    val title: String,
-    val author: String,
+    val titulo: String,
+    val autor: String,
     val url: String,
+    val imagen:String,
 ): Parcelable

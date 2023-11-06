@@ -23,13 +23,13 @@ class SongAdapter (): ListAdapter<Song, SongAdapter.SongViewHolder>(SongDiffCall
 
         inner class SongViewHolder(private val binding: ItemSongBinding) :  RecyclerView.ViewHolder(binding.root) {
                 fun bind(song: Song){
-                    binding.songTitle.text = song.title
-                    binding.songAuthor.text = song.author
+                    binding.songTitle.text = song.titulo
+                    binding.songAuthor.text = song.autor
                 }
         }
     class SongDiffCallback: DiffUtil.ItemCallback<Song>() {
         override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.titulo == newItem.titulo
         }
 
         override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
