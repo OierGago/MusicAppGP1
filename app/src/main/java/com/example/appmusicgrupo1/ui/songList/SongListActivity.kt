@@ -1,14 +1,15 @@
 package com.example.appmusicgrupo1.ui.songList
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.example.appmusicgrupo1.R
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
+import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
 import com.example.appmusicgrupo1.utils.Resource
 
 class SongListActivity : ComponentActivity() {
@@ -69,13 +70,13 @@ class SongListActivity : ComponentActivity() {
             }
         })
 
+        binding.btnFavoritos.setOnClickListener() {
+            val intent = Intent(this, FavoriteListActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
 
-//        binding.btnFavorito.setOnclickListener() {
-//            val intent = Intent(this, FavoriteActivity::class.java)
-//            finish()
-//            startActivity(intent)
-//        }
+
 

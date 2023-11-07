@@ -5,5 +5,5 @@ import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.utils.Resource
 
 interface FavoriteRepository {
-    suspend fun getFavorites() : Resource<List<Favorite>>
+    suspend fun getFavorites() : Resource<List<Song>>
 }

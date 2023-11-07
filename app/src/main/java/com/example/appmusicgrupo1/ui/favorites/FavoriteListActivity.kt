@@ -1,6 +1,7 @@
 package com.example.appmusicgrupo1.ui.favorites
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -8,20 +9,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.appmusicgrupo1.R
+import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSource
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
+import com.example.appmusicgrupo1.databinding.ActivityFavoriteListBinding
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.ui.songList.SongAdapter
+import com.example.appmusicgrupo1.ui.songList.SongListActivity
 import com.example.appmusicgrupo1.ui.songList.SongViewModel
 import com.example.appmusicgrupo1.ui.songList.SongViewModelFactory
 import com.example.appmusicgrupo1.utils.Resource
 
 class FavoriteListActivity : ComponentActivity() {
 
-    private lateinit var songAdapter: SongAdapter
-    private val songRepository = RemoteSongDataSource();
+    private lateinit var favoriteAdapter: SongAdapter
+    private val favoriteRepository = RemoteFavoriteDataSource();
 
-    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(
-        songRepository
+    private val viewModel: FavoriteViewModel by viewModels { FavoriteViewModelFactory(
+        favoriteRepository
 
     )
     }
@@ -29,11 +33,11 @@ class FavoriteListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMusicListBinding.inflate(layoutInflater)
+        val binding = ActivityFavoriteListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        songAdapter = SongAdapter()
-        binding.songView.adapter = songAdapter
+        favoriteAdapter = SongAdapter()
+        binding.songView.adapter = favoriteAdapter
         Log.i("Prueba", "11")
 
 
@@ -43,7 +47,7 @@ class FavoriteListActivity : ComponentActivity() {
                 Resource.Status.SUCCESS -> {
                     if  (!it.data.isNullOrEmpty()) {
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
-                        songAdapter.submitList(it.data)
+                        favoriteAdapter.submitList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -74,12 +78,12 @@ class FavoriteListActivity : ComponentActivity() {
             }
         })
 
+        binding.btnCanciones.setOnClickListener() {
+            val intent = Intent(this, SongListActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
 
-//        binding.btnFavorito.setOnclickListener() {
-//            val intent = Intent(this, FavoriteActivity::class.java)
-//            finish()
-//            startActivity(intent)
-//        }
+

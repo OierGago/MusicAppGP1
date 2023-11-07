@@ -9,22 +9,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.data.repository.FavoriteRepository
 import com.example.appmusicgrupo1.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SongViewModelFactory(
-    private val songRepository: SongRepository
+class FavoriteViewModelFactory(
+    private val favoriteRepository: FavoriteRepository
 
 ):ViewModelProvider.Factory{
     override fun <T :  ViewModel> create(modelClass: Class<T>, extras : CreationExtras): T{
-        return FavoriteViewModel(songRepository) as T
+        return FavoriteViewModel(favoriteRepository) as T
     }
 }
 
 class FavoriteViewModel(
-    private val songRepository: SongRepository
+    private val favoriteRepository: FavoriteRepository
 ) : ViewModel(){
     private val _items = MutableLiveData<Resource<List<Song>>>()
 
@@ -48,7 +49,7 @@ class FavoriteViewModel(
 
     suspend fun getSongFromRepository() : Resource<List<Song>>{
         return withContext(Dispatchers.IO){
-            songRepository.getSongs()
+            favoriteRepository.getFavorites()
 
         }
     }
