@@ -1,6 +1,8 @@
 package com.example.appmusicgrupo1.data.repository.remote
 
+import com.example.appmusicgrupo1.data.AuthenticationResponse
 import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.data.repository.AuthenticationRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -27,5 +29,9 @@ interface APIInterface {
 
     @GET("favorite/2")
     suspend fun getFavorites(): Response<List<Song>>
+
+    @POST("user/login")
+    suspend fun login(@Body authenticationRequest : AuthenticationRequest): Response<AuthenticationResponse>
+
 
 }
