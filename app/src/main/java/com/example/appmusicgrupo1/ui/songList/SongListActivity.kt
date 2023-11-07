@@ -1,15 +1,18 @@
 package com.example.appmusicgrupo1.ui.songList
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.example.appmusicgrupo1.R
+import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.utils.Resource
+
 
 class SongListActivity : ComponentActivity() {
 
@@ -27,7 +30,7 @@ class SongListActivity : ComponentActivity() {
         val binding = ActivityMusicListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        songAdapter = SongAdapter()
+        songAdapter = SongAdapter(::onYoutubeClickList, ::onFavoriteClickList)
         binding.songView.adapter = songAdapter
         Log.i("Prueba", "11")
 
@@ -68,9 +71,25 @@ class SongListActivity : ComponentActivity() {
                 }
             }
         })
-
-
     }
+
+    private fun onYoutubeClickList(song: Song) {
+        Log.i("Canción", "Canción")
+        val webIntent: Intent = Uri.parse(song.url).let { webpage ->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+        startActivity(webIntent)
+    }
+
+    private fun onFavoriteClickList(song: Song) {
+//        if() {
+//            FavoriteviewModel.deleteFromFavorite(idUser, idSong)
+//        }
+//            else{
+//            }
+        Log.i("Favorito", "Favorito")
+    }
+
 }
 
 //        binding.btnFavorito.setOnclickListener() {
