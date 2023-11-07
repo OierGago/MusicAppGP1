@@ -1,38 +1,43 @@
-package com.example.appmusicgrupo1.ui.songList
+package com.example.appmusicgrupo1.ui.favorites
+
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.R
+import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSource
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
+import com.example.appmusicgrupo1.databinding.ActivityFavoriteListBinding
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
-import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
+import com.example.appmusicgrupo1.ui.songList.SongAdapter
+import com.example.appmusicgrupo1.ui.songList.SongListActivity
+import com.example.appmusicgrupo1.ui.songList.SongViewModel
+import com.example.appmusicgrupo1.ui.songList.SongViewModelFactory
 import com.example.appmusicgrupo1.utils.Resource
 
+class FavoriteListActivity : ComponentActivity() {
 
-class SongListActivity : ComponentActivity() {
+    private lateinit var favoriteAdapter: SongAdapter
+    private val favoriteRepository = RemoteFavoriteDataSource();
 
-    private lateinit var songAdapter: SongAdapter
-    private val songRepository = RemoteSongDataSource();
+    private val viewModel: FavoriteViewModel by viewModels { FavoriteViewModelFactory(
+        favoriteRepository
 
-    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(
-        songRepository
-
-    )}
+    )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMusicListBinding.inflate(layoutInflater)
+        val binding = ActivityFavoriteListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        songAdapter = SongAdapter(::onYoutubeClickList, ::onFavoriteClickList)
-        binding.songView.adapter = songAdapter
+        favoriteAdapter = SongAdapter()
+        binding.songView.adapter = favoriteAdapter
         Log.i("Prueba", "11")
 
 
@@ -42,7 +47,7 @@ class SongListActivity : ComponentActivity() {
                 Resource.Status.SUCCESS -> {
                     if  (!it.data.isNullOrEmpty()) {
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
-                        songAdapter.submitList(it.data)
+                        favoriteAdapter.submitList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -73,30 +78,12 @@ class SongListActivity : ComponentActivity() {
             }
         })
 
-        binding.btnFavoritos.setOnClickListener() {
-            val intent = Intent(this, FavoriteListActivity::class.java)
+        binding.btnCanciones.setOnClickListener() {
+            val intent = Intent(this, SongListActivity::class.java)
             startActivity(intent)
         }
-    }
 
-    private fun onYoutubeClickList(song: Song) {
-        Log.i("Canción", "Canción")
-        val webIntent: Intent = Uri.parse(song.url).let { webpage ->
-            Intent(Intent.ACTION_VIEW, webpage)
-        }
-        startActivity(webIntent)
     }
-
-    private fun onFavoriteClickList(song: Song) {
-//        if() {
-//            FavoriteviewModel.deleteFromFavorite(idUser, idSong)
-//        }
-//            else{
-//            }
-        Log.i("Favorito", "Favorito")
-    }
-
 }
-
 
 

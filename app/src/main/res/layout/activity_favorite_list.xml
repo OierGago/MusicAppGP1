@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <Button
-        android:id="@+id/btnFavorito"
+        android:id="@+id/btnCanciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#BC0000"
@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:srcCompat="@drawable/_56212" />
+        android:src="@drawable/_56212" />
 
     <EditText
         android:id="@+id/search"
@@ -79,7 +79,7 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        android:src="@android:drawable/ic_menu_revert" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -90,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="@drawable/sin_t_tulo" />
+        android:src="@drawable/sin_t_tulo" />
 
     <Button
         android:id="@+id/byTitle"
@@ -155,6 +155,7 @@
         android:layout_height="444dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAutor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 

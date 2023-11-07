@@ -25,4 +25,7 @@ interface APIInterface {
     @DELETE("song/{id}")
     suspend fun deleteSong(@Path("id") id : Int): Response<Integer>
 
+    @GET("favorite/2")
+    suspend fun getFavorites(): Response<List<Song>>
+
 }
