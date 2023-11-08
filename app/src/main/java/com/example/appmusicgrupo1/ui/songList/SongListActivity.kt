@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
@@ -32,6 +33,9 @@ class SongListActivity : ComponentActivity() {
         binding.songView.adapter = songAdapter
         Log.i("Prueba", "11")
 
+        binding.search.addTextChangedListener {
+            songAdapter.filter(binding.search.text.toString())
+        }
 
         viewModel.items.observe(this, Observer {
 
@@ -40,6 +44,7 @@ class SongListActivity : ComponentActivity() {
                     if  (!it.data.isNullOrEmpty()) {
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
                         songAdapter.submitList(it.data)
+                        songAdapter.submitSongList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {

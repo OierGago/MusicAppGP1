@@ -9,10 +9,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.databinding.ItemSongBinding
 import com.squareup.picasso.Picasso
+import java.util.Locale
 
 class SongAdapter (): ListAdapter<Song, SongAdapter.SongViewHolder>(SongDiffCallback()){
 
+    private var songListFull: List<Song> = emptyList()
+    private var songListFiltered: List<Song> = emptyList()
 
+
+    // Método para establecer la lista completa de canciones y actualizar la lista filtrada
+    fun submitSongList(songs: List<Song>) {
+        songListFull = songs
+        filter("") // Al recibir una nueva lista de canciones, mostramos todas las canciones
+    }
+
+    // Método para filtrar la lista de canciones
+    fun filter(text: String) {
+        val searchText = text.trim().lowercase(Locale.getDefault())
+
+        songListFiltered = if (searchText.isEmpty()) {
+            songListFull // Restauramos la lista completa si el texto está vacío
+        } else {
+            songListFull.filter {
+                it.titulo.lowercase(Locale.getDefault()).contains(searchText) ||
+                        it.autor.lowercase(Locale.getDefault()).contains(searchText)
+                // Puedes agregar otros campos aquí para el filtrado
+            }
+        }
+
+        submitList(songListFiltered) // Mostramos los resultados filtrados en el RecyclerView
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val binding = ItemSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SongViewHolder(binding)
