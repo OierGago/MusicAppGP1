@@ -17,22 +17,26 @@ class SongAdapter (): ListAdapter<Song, SongAdapter.SongViewHolder>(SongDiffCall
     private var songListFiltered: List<Song> = emptyList()
 
 
+
     // Método para establecer la lista completa de canciones y actualizar la lista filtrada
     fun submitSongList(songs: List<Song>) {
         songListFull = songs
-        filter("") // Al recibir una nueva lista de canciones, mostramos todas las canciones
+        filter("",  true) // Al recibir una nueva lista de canciones, mostramos todas las canciones
     }
 
     // Método para filtrar la lista de canciones
-    fun filter(text: String) {
+    fun filter(text: String, esTitulo : Boolean) {
         val searchText = text.trim().lowercase(Locale.getDefault())
 
         songListFiltered = if (searchText.isEmpty()) {
             songListFull // Restauramos la lista completa si el texto está vacío
         } else {
             songListFull.filter {
-                it.titulo.lowercase(Locale.getDefault()).contains(searchText) ||
-                        it.autor.lowercase(Locale.getDefault()).contains(searchText)
+                if(esTitulo){
+                    it.titulo.lowercase(Locale.getDefault()).contains(searchText)
+                } else {
+                    it.autor.lowercase(Locale.getDefault()).contains(searchText)
+                }
                 // Puedes agregar otros campos aquí para el filtrado
             }
         }

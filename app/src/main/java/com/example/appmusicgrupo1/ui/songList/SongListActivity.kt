@@ -17,6 +17,7 @@ class SongListActivity : ComponentActivity() {
 
     private lateinit var songAdapter: SongAdapter
     private val songRepository = RemoteSongDataSource();
+    private var esTitulo : Boolean = true
 
     private val viewModel: SongViewModel by viewModels { SongViewModelFactory(
         songRepository
@@ -33,9 +34,21 @@ class SongListActivity : ComponentActivity() {
         binding.songView.adapter = songAdapter
         Log.i("Prueba", "11")
 
-        binding.search.addTextChangedListener {
-            songAdapter.filter(binding.search.text.toString())
+        binding.btnAutor.setOnClickListener{
+            esTitulo = false
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
         }
+
+        binding.byTitle.setOnClickListener{
+            esTitulo = true
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.search.addTextChangedListener(){
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+
 
         viewModel.items.observe(this, Observer {
 

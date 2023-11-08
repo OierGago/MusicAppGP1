@@ -23,11 +23,9 @@
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:layout_marginBottom="1dp"
         android:background="@android:color/holo_red_dark"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/songView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,11 +149,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/songView"
-        android:layout_width="413dp"
-        android:layout_height="444dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAutor"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/btnCanciones"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
