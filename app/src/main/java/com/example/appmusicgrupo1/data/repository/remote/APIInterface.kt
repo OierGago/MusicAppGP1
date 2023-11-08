@@ -6,6 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIInterface {
@@ -25,7 +26,13 @@ interface APIInterface {
     @DELETE("song/{id}")
     suspend fun deleteSong(@Path("id") id : Int): Response<Integer>
 
-    @GET("favorite/2")
-    suspend fun getFavorites(): Response<List<Song>>
+    @GET("favorite/{id}")
+    suspend fun getFavorites(@Path("id") id : Int): Response<List<Song>>
+
+    @DELETE("favorite/{idUser}/{idSong}")
+    suspend fun deleteFromFavorite(@Path("idUser") idUser: Int,@Path("idSong") idSong : Int): Response<Integer>
+
+    @POST("favorite/")
+    suspend fun addFavorite(@Body song: Song): Response<Integer>
 
 }

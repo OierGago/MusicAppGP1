@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSource
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
@@ -19,11 +20,10 @@ class SongListActivity : ComponentActivity() {
 
     private lateinit var songAdapter: SongAdapter
     private val songRepository = RemoteSongDataSource();
+    private val favoriteRepository = RemoteFavoriteDataSource();
 
-    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(
-        songRepository
-
-    )}
+    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(songRepository, favoriteRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +41,12 @@ class SongListActivity : ComponentActivity() {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     if  (!it.data.isNullOrEmpty()) {
-                        Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
+                        //Log.i("Prueba", "Ha ocurrido un cambio en la lista de canciones")
                         songAdapter.submitList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {
-                    Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
+                    //Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
 
                 }
@@ -76,6 +76,7 @@ class SongListActivity : ComponentActivity() {
         binding.btnFavoritos.setOnClickListener() {
             val intent = Intent(this, FavoriteListActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

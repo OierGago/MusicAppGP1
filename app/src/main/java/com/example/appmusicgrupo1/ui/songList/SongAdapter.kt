@@ -48,6 +48,12 @@ class SongAdapter (
                         .get()
                         .load(thumbnailUrl)
                         .into(binding.songImage)
+                    Log.i("PruebaFav", song.toString())
+                    if(song.favorito) {
+                        binding.songFavorite.setImageResource(R.drawable.heart_coraz_n_svg);
+                    } else {
+                        binding.songFavorite.setImageResource(R.drawable.nofavorite);
+                    }
                 }
         }
     class SongDiffCallback: DiffUtil.ItemCallback<Song>() {
