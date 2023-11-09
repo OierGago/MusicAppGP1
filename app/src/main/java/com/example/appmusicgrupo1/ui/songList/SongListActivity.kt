@@ -4,13 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.example.appmusicgrupo1.R
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSource
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
@@ -24,6 +22,7 @@ class SongListActivity : ComponentActivity() {
     private lateinit var songAdapter: SongAdapter
     private val songRepository = RemoteSongDataSource();
     private val favoriteRepository = RemoteFavoriteDataSource();
+    private var esTitulo : Boolean = true
 
     private val viewModel: SongViewModel by viewModels { SongViewModelFactory(songRepository, favoriteRepository)
     }
@@ -37,6 +36,21 @@ class SongListActivity : ComponentActivity() {
         songAdapter = SongAdapter(::onYoutubeClickList, viewModel::onFavoriteClickList)
         binding.songView.adapter = songAdapter
 
+        binding.btnAutor.setOnClickListener{
+            esTitulo = false
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.byTitle.setOnClickListener{
+            esTitulo = true
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.search.addTextChangedListener(){
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+
 
         viewModel.items.observe(this, Observer {
             when (it.status) {
@@ -45,6 +59,7 @@ class SongListActivity : ComponentActivity() {
 
                         songAdapter.submitList(it.data)
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de canciones")
+                        songAdapter.submitSongList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -64,7 +79,6 @@ class SongListActivity : ComponentActivity() {
                     Log.i("Prueba", "Ha entrado")
                     //viewModel.updateSongList()
                     viewModel.getFavorites()
-                    cambioImagenFav()
                 }
                 Resource.Status.ERROR -> {
                     Log.i("Prueba", "error _created")
