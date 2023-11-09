@@ -10,4 +10,5 @@ data class Song(
     val autor: String,
     val url: String,
     val imagen:String,
+    var favorito:Boolean = false,
 ): Parcelable

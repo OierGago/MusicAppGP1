@@ -13,7 +13,7 @@ import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.databinding.ItemSongBinding
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter (): ListAdapter<Song, FavoriteAdapter.SongViewHolder>(SongDiffCallback()){
+class FavoriteAdapter(): ListAdapter<Song, FavoriteAdapter.SongViewHolder>(SongDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val binding = ItemSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SongViewHolder(binding)

@@ -21,7 +21,7 @@ import com.example.appmusicgrupo1.utils.Resource
 
 class FavoriteListActivity : ComponentActivity() {
 
-    private lateinit var favoriteAdapter: SongAdapter
+    private lateinit var favoriteAdapter: FavoriteAdapter
     private val favoriteRepository = RemoteFavoriteDataSource();
 
     private val viewModel: FavoriteViewModel by viewModels { FavoriteViewModelFactory(
@@ -36,7 +36,7 @@ class FavoriteListActivity : ComponentActivity() {
         val binding = ActivityFavoriteListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        favoriteAdapter = SongAdapter()
+        favoriteAdapter = FavoriteAdapter()
         binding.songView.adapter = favoriteAdapter
         Log.i("Prueba", "11")
 
@@ -81,6 +81,7 @@ class FavoriteListActivity : ComponentActivity() {
         binding.btnCanciones.setOnClickListener() {
             val intent = Intent(this, SongListActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
     }
