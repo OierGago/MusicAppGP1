@@ -8,6 +8,8 @@ import com.example.appmusicgrupo1.data.repository.SongRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.appmusicgrupo1.R
+import com.example.appmusicgrupo1.data.Favorite
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.data.repository.FavoriteRepository
 import com.example.appmusicgrupo1.utils.Resource
@@ -42,64 +44,59 @@ class SongViewModel(
 
     init {
         updateSongList()
+        getFavorites()
+    }
+
+    fun obtenerFavoritos() {
+        if (_items.value != null && _itemsFav.value != null) {
+            val nuevaLista = arrayListOf<Song>()
+            for (itemsList in _items.value!!.data!!){
+                nuevaLista.add(itemsList)
+            }
+            Log.i("PruebaArray", nuevaLista.toString())
+            for (itemFav in _itemsFav.value!!.data!!) {
+                itemFav.favorito = true
+                for (itemSong in _items.value!!.data!!) {
+                    if (itemFav.id == itemSong.id) {
+//                        Log.i("Prueba", "va2")
+                        itemSong.favorito = true
+                    }
+                }
+            }
+        }
+
+    }
+    fun getFavorites() {
+        viewModelScope.launch {
+            val repoResponseFav = getFavoriteList(2)
+            _itemsFav.value = repoResponseFav
+
+            obtenerFavoritos()
+        }
     }
 
     fun updateSongList() {
         viewModelScope.launch {
-            val listOfSongs = _items.value?.data
             val repoResponse = getSongFromRepository();
             _items.value = repoResponse
-            val repoResponseFav = getFavoriteList(2)
-            _itemsFav.value = repoResponseFav
-            for (itemFav in _itemsFav.value!!.data!!) {
-                itemFav.favorito = true
-                if (listOfSongs != null) {
-                    for (itemSong in listOfSongs) {
-                        if (itemFav.id == itemSong.id) {
-                            if (itemSong != null) {
-                                itemSong.favorito = true
-                                Log.i("PruebaLista", itemSong.toString())
-                            }
-                        }
-                    }
-                }
-            }
 
+            obtenerFavoritos()
         }
     }
-
-//    private fun favoriteList(id : Int){
-//        viewModelScope.launch {
-//            val repoResponseFav = getFavoriteList(id)
-//            _itemsFav.value = repoResponseFav
-
-//            for (item in _itemsFav.value!!.data!!){
-//                for(item in _items.value!!.data!!){
-//                    if(){
-//                        val listOfSongs = _items.value?.data
-//                        val song = listOfSongs?.get(0)
-//                        if (song != null) {
-//                            song.favorito = true
-//                        }
-//                    }
-//                }
-//            }
-
-//            for (itemFav in _itemsFav.value!!.data!!){
-//                itemFav.favorito = true
-//                Log.i("PruebaSongFor", itemFav.toString())
-////
-//            }
-//            Log.i("PruebaSongForNoFav", _items.value.toString())
-//            for(itemSong in _items.value!!.data!!){
-//                    Log.i("PruebaSongForNoFav", itemSong.toString())
-            //                    if(itemFav.favorito != itemSong.favorito){
-//                        itemSong.favorito=true
-//                        Log.i("SongFav", itemSong.toString())
-//                    }
-//                 }
-//        }
-//    }
+    fun onFavoriteClickList(song: Song) {
+        viewModelScope.launch {
+            if (song.favorito) {
+                _created.value = deleteFromFavorite(2, song.id)
+                song.favorito = false
+                Log.i("PRueba", "Cancion " + song.id + " borrada")
+            } else {
+                var favorite = Favorite(2, song.id)
+                _created.value = addToFavorite(favorite)
+                song.favorito = true
+                Log.i("PRueba", "Cancion " + song.id + " añadida")
+            }
+        }
+    }
 
     suspend fun getFavoriteList(id: Int): Resource<List<Song>> {
         return withContext(Dispatchers.IO){
@@ -111,6 +108,18 @@ class SongViewModel(
         return withContext(Dispatchers.IO){
             songRepository.getSongs()
 
+        }
+    }
+
+    suspend fun deleteFromFavorite(idUser: Int, idSong : Int) : Resource<Integer> {
+        return withContext(Dispatchers.IO){
+            favoriteRespository.deleteFromFavorite(idUser, idSong)
+        }
+    }
+
+    suspend fun addToFavorite(favorite: Favorite) : Resource<Integer>{
+        return withContext(Dispatchers.IO){
+            favoriteRespository.addFavorite(favorite)
         }
     }
 

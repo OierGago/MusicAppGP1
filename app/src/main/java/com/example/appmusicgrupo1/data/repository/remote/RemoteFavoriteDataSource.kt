@@ -1,5 +1,6 @@
 package com.example.appmusicgrupo1.data.repository.remote
 
+import com.example.appmusicgrupo1.data.Favorite
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.data.repository.FavoriteRepository
 import com.example.appmusicgrupo1.data.repository.SongRepository
@@ -14,7 +15,7 @@ class RemoteFavoriteDataSource  : BaseDataSource(), FavoriteRepository {
         RetrofitClient.apiInterface.deleteFromFavorite(idUser, idSong)
     }
 
-    override suspend fun addFavorite(song: Song)= getResult {
-        RetrofitClient.apiInterface.addFavorite(song)
+    override suspend fun addFavorite(favorite: Favorite)= getResult {
+        RetrofitClient.apiInterface.addFavorite(favorite)
     }
 }

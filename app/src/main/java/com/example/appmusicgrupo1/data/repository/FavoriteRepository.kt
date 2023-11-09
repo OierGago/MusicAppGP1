@@ -12,5 +12,5 @@ interface FavoriteRepository {
 
     suspend fun deleteFromFavorite(idUsuario: Int,idSong : Int): Resource<Integer>
 
-    suspend fun addFavorite(song: Song): Resource<Integer>
+    suspend fun addFavorite(favorite: Favorite): Resource<Integer>
 }
