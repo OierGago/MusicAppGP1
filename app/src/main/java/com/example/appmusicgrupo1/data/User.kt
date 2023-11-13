@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val id: Int,
     val login:String,
-    val name:String,
-    val surname:String,
+    val nombre:String,
+    val apellido:String,
     val mail:String,
-    val password:String,
+    val contrasenya:String,
     val activo:Boolean
 ) :Parcelable

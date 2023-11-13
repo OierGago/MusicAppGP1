@@ -3,7 +3,9 @@ package com.example.appmusicgrupo1.data.repository.remote
 import com.example.appmusicgrupo1.data.AuthenticationResponse
 import com.example.appmusicgrupo1.data.Favorite
 import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.data.User
 import com.example.appmusicgrupo1.data.repository.AuthenticationRequest
+import com.example.appmusicgrupo1.data.repository.UserRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -41,5 +43,7 @@ interface APIInterface {
     @POST("user/login")
     suspend fun login(@Body authenticationRequest : AuthenticationRequest): Response<AuthenticationResponse>
 
+    @POST("user/signup")
+    suspend fun signup(@Body userRequest: UserRequest): Response<Int>
 
 }
