@@ -20,66 +20,98 @@ class LoginActivity : ComponentActivity() {
 
     private val authenticationRepository = RemoteAuthenticationRepository();
 
-    private val viewModel: LoginViewModel by viewModels { LoginViewModelFactory(
-        authenticationRepository
-    ) }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // cargamos el XML en la actividad
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // el listener del boton
-        binding.Login.setOnClickListener() {
-
-            viewModel.onLoginClick(
-                binding.Username.text.toString(),
-                binding.Password.text.toString()
-            )
-        }
-        binding.Register.setOnClickListener() {
-            val intent = Intent(this, RegisterActivity::class.java).apply {
-                // putExtra(EXTRA_MESSAGE, message)
-            }
-            startActivity(intent)
-            // si queremos quitar esta actividad...
-            finish()
-        }
-
-        // el cambio en login del VM cuando el server nos devuelva su respuesta
-        viewModel.login.observe(this, Observer {
-            when (it.status) {
-                Resource.Status.SUCCESS -> {
-                    it.data?.let { data ->
-                        MyApp.userPreferences.saveAuthToken(data.accessToken,data.id,data.login)
-                        // MyApp.userPreferences.saveAuthId(MyApp.userPreferences.getUserId(data.accessToken))
-                        // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
-                        // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
-                        Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
-                        // TODO hacer lo que sea necesario en este caso cambiamos de actividad
-                        val intent = Intent(this, SongListActivity::class.java).apply {
-                           // putExtra(EXTRA_MESSAGE, message)
-                        }
-                        startActivity(intent)
-                        // si queremos quitar esta actividad...
-                        finish()
-                    }
-                }
-                Resource.Status.ERROR -> {
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-                Resource.Status.LOADING -> {
-                    // de momento
-                }
-            }
-        })
-
-
-
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(
+            authenticationRepository
+        )
     }
 
+
+    class LoginActivity : ComponentActivity() {
+
+        private val authenticationRepository = RemoteAuthenticationRepository();
+
+        private val viewModel: LoginViewModel by viewModels {
+            LoginViewModelFactory(
+                authenticationRepository
+            )
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            // cargamos el XML en la actividad
+            val binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            val extras = intent.extras
+            if (extras != null) {
+                val dato1 = extras.getString("login")
+                val dato2 = extras.getString("contrasenya")
+                binding.Username.setText(dato1)
+                binding.Password.setText(dato2)
+            }
+            // funcion intent
+            /*  val intent = intent
+              if (intent != null) {
+                  // Verificar si el Intent tiene datos extras
+                  val extras = intent.extras
+                  if (extras != null) {
+                      // Obtener los datos específicos que necesitas
+                      val dato1 = extras.getString("login")
+                      val dato2 = extras.getInt("contrasenya")
+                      binding.Username.setText(dato1)
+                      binding.Password.setText(dato2)
+                  }
+              }*/
+
+            // el listener del boton
+            binding.Login.setOnClickListener() {
+
+                viewModel.onLoginClick(
+                    binding.Username.text.toString(),
+                    binding.Password.text.toString()
+                )
+            }
+            binding.Register.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java).apply {
+                }
+                startActivity(intent)
+                finish()
+            }
+
+            // el cambio en login del VM cuando el server nos devuelva su respuesta
+            viewModel.login.observe(this, Observer {
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        it.data?.let { data ->
+                            MyApp.userPreferences.saveAuthToken(
+                                data.id,
+                                data.contrasenya,
+                                data.login,
+                                data.accessToken
+                            )
+                            // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
+                            // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
+                            Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
+                            // TODO hacer lo que sea necesario en este caso cambiamos de actividad
+                            // val intent = Intent(this, EmployeesActivity::class.java).apply {
+                            // putExtra(EXTRA_MESSAGE, message)
+                            //}
+                            //  startActivity(intent)
+                            // si queremos quitar esta actividad...
+                            // finish()
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Resource.Status.LOADING -> {
+                        // de momento
+                    }
+                }
+            })
+
+        }
+    }
 }

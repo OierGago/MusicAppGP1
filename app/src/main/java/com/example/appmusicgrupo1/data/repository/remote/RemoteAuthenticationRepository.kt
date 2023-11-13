@@ -10,7 +10,7 @@ class RemoteAuthenticationRepository :  BaseDataSource(), AuthenticationReposito
     override suspend fun login(authenticationRequest : AuthenticationRequest): Resource<AuthenticationResponse> = getResult {
         RetrofitClient.apiInterface.login(authenticationRequest)
     }
-    override suspend fun signIn(userRequest : UserRequest): Resource<Integer> = getResult {
-        RetrofitClient.apiInterface.signIn(userRequest)
+    override suspend fun signup(userRequest: UserRequest) : Resource<Int> = getResult {
+        RetrofitClient.apiInterface.signup(userRequest)
     }
 }

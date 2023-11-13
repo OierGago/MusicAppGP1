@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class LoginViewModel(
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
@@ -22,8 +23,8 @@ class LoginViewModel(
     private val _login = MutableLiveData<Resource<AuthenticationResponse>>()
     val login : LiveData<Resource<AuthenticationResponse>> get() = _login
 
-    fun onLoginClick(login: String, password: String) {
-        val authenticationRequest = AuthenticationRequest(login, password)
+    fun onLoginClick(email: String, password: String) {
+        val authenticationRequest = AuthenticationRequest(email, password)
         viewModelScope.launch {
             _login.value = login(authenticationRequest)
         }

@@ -6,8 +6,8 @@ import com.example.appmusicgrupo1.utils.Resource
 
 interface AuthenticationRepository {
     suspend fun login(authenticationRequest: AuthenticationRequest) : Resource<AuthenticationResponse>
-    suspend fun signIn(userRequest : UserRequest): Resource<Integer>
 
+    suspend fun signup(userRequest: UserRequest): Resource<Int>
 
     // TODOregistro
 }

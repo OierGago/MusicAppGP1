@@ -9,7 +9,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitClient {
-    const val API_URI = "http://10.5.7.162:8080/api/"
+
+    //const val API_URI = "http://10.0.2.2:8080/api/"
+
+    const val API_URI = "http://10.5.7.159:8081/api/"
+    //const val API_URI = "http://10.5.7.129:8080/api/"
+
 
     var client = OkHttpClient.Builder().addInterceptor { chain ->
         Log.i("prueba", "client")

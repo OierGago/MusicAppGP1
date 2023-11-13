@@ -44,6 +44,6 @@ interface APIInterface {
     suspend fun login(@Body authenticationRequest : AuthenticationRequest): Response<AuthenticationResponse>
 
     @POST("user/signup")
-    suspend fun signIn(@Body userRequest : UserRequest): Response<Integer>
+    suspend fun signup(@Body userRequest: UserRequest): Response<Int>
 
 }
