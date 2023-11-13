@@ -41,10 +41,7 @@
                 android:layout_height="34dp"
                 android:layout_marginVertical="5dp"
                 android:fontFamily="@font/inter_medium"
-<<<<<<< HEAD
                 android:paddingTop="0dp"
-=======
->>>>>>> 3e2642bc0539cac309cf19316aa9ffc15c049549
                 android:text="TextView" />
         </LinearLayout>
 
