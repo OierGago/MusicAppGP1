@@ -88,6 +88,7 @@ class SongViewModel(
             if (song.favorito) {
                 _created.value = deleteFromFavorite(2, song.id)
                 song.favorito = false
+
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
             } else {
                 var favorite = Favorite(2, song.id)

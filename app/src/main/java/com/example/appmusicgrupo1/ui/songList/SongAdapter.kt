@@ -64,6 +64,7 @@ class SongAdapter (
             onYoutubeClickList(song)
         }
         holder.itemView.findViewById<ImageView>(R.id.songFavorite).setOnClickListener {
+
             onFavoriteClickList(song)
 
         }
@@ -80,14 +81,22 @@ class SongAdapter (
                         .into(binding.songImage)
                     if(song.favorito) {
                         Log.i("PruebaCambio", "Cambiado a favorito")
-                        binding.songFavorite.setImageResource(R.drawable.heart_coraz_n_svg);
+                        cambioFavorito()
                     } else {
                         Log.i("PruebaCambio", "Cambiado a no favorito")
+                        cambioNoFavorito()
                         //binding.songFavorite.setImageResource(R.drawable.nofavorite);
-                        binding.songFavorite.setImageResource(R.drawable.nofavorite);
+
                     }
                 }
+        fun cambioFavorito(){
+            binding.songFavorite.setImageResource(R.drawable.heart_coraz_n_svg);
         }
+        fun cambioNoFavorito(){
+            binding.songFavorite.setImageResource(R.drawable.nofavorite);
+        }
+    }
+
     class SongDiffCallback: DiffUtil.ItemCallback<Song>() {
         override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
             return oldItem.titulo == newItem.titulo
