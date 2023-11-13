@@ -49,9 +49,10 @@ class FavoriteViewModel(
 
     suspend fun getSongFromRepository() : Resource<List<Song>>{
         return withContext(Dispatchers.IO){
-            favoriteRepository.getFavorites()
+            favoriteRepository.getFavorites(2)
 
         }
     }
+
 
 }

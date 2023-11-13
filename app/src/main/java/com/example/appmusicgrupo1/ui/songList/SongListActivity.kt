@@ -1,26 +1,31 @@
 package com.example.appmusicgrupo1.ui.songList
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.example.appmusicgrupo1.data.Song
+import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSource
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
 import com.example.appmusicgrupo1.utils.Resource
 
+
 class SongListActivity : ComponentActivity() {
 
     private lateinit var songAdapter: SongAdapter
     private val songRepository = RemoteSongDataSource();
+    private val favoriteRepository = RemoteFavoriteDataSource();
+    private var esTitulo : Boolean = true
 
-    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(
-        songRepository
-
-    )}
+    private val viewModel: SongViewModel by viewModels { SongViewModelFactory(songRepository, favoriteRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +33,37 @@ class SongListActivity : ComponentActivity() {
         val binding = ActivityMusicListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        songAdapter = SongAdapter()
+        songAdapter = SongAdapter(::onYoutubeClickList, viewModel::onFavoriteClickList)
         binding.songView.adapter = songAdapter
-        Log.i("Prueba", "11")
+
+        binding.btnAutor.setOnClickListener{
+            esTitulo = false
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.byTitle.setOnClickListener{
+            esTitulo = true
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.search.addTextChangedListener(){
+            songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
 
 
         viewModel.items.observe(this, Observer {
-
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     if  (!it.data.isNullOrEmpty()) {
-                        Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
+
                         songAdapter.submitList(it.data)
+                        Log.i("Prueba", "Ha ocurrido un cambio en la lista de canciones")
+                        songAdapter.submitSongList(it.data)
                     }
                 }
                 Resource.Status.ERROR -> {
-                    Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
+                    //Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
 
                 }
@@ -54,14 +74,14 @@ class SongListActivity : ComponentActivity() {
         })
 
         viewModel.created.observe(this, Observer {
-            Log.i("Prueba", "ha entrado aqui")
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     Log.i("Prueba", "Ha entrado")
-                    viewModel.updateSongList()
+                    //viewModel.updateSongList()
+                    viewModel.getFavorites()
                 }
                 Resource.Status.ERROR -> {
-                    Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
+                    Log.i("Prueba", "error _created")
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
                 Resource.Status.LOADING -> {
@@ -73,9 +93,22 @@ class SongListActivity : ComponentActivity() {
         binding.btnFavoritos.setOnClickListener() {
             val intent = Intent(this, FavoriteListActivity::class.java)
             startActivity(intent)
+            finish()
         }
-
     }
+
+
+
+    private fun onYoutubeClickList(song: Song) {
+        Log.i("Canción", "Canción")
+        val webIntent: Intent = Uri.parse(song.url).let { webpage ->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+        startActivity(webIntent)
+    }
+
+
+
 }
 
 

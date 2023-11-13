@@ -3,5 +3,11 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="false">10.5.7.25</domain>
         <domain includeSubdomains="false">10.5.7.17</domain>
+<<<<<<< HEAD
+        <domain includeSubdomains="false">10.0.2.2</domain>
+=======
+        <domain includeSubdomains="false">10.5.7.129</domain>
+>>>>>>> 3e2642bc0539cac309cf19316aa9ffc15c049549
+
     </domain-config>
 </network-security-config>
