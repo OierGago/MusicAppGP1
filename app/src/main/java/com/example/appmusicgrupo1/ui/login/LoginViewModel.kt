@@ -22,8 +22,8 @@ class LoginViewModel(
     private val _login = MutableLiveData<Resource<AuthenticationResponse>>()
     val login : LiveData<Resource<AuthenticationResponse>> get() = _login
 
-    fun onLoginClick(email: String, password: String) {
-        val authenticationRequest = AuthenticationRequest(email, password)
+    fun onLoginClick(login: String, password: String) {
+        val authenticationRequest = AuthenticationRequest(login, password)
         viewModelScope.launch {
             _login.value = login(authenticationRequest)
         }
