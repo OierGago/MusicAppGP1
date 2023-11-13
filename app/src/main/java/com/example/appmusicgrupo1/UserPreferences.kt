@@ -3,6 +3,7 @@ package com.example.appmusicgrupo1
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.appmusicgrupo1.data.User
 
 
 class UserPreferences() {
@@ -30,6 +31,12 @@ class UserPreferences() {
         editor.apply()
     }
 
+    fun fetchAuthId():Int? {
+        return sharedPreferences.getInt(USER_ID,0)
+    }
+    fun fetchAuthLogin():String?{
+        return sharedPreferences.getString(USER_LOGIN, null)
+    }
     /**
      * Function to fetch auth token
      */
