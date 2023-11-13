@@ -36,12 +36,12 @@ import com.example.appmusicgrupo1.utils.Resource
             val binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
-            val extras = intent.extras
+            /* val extras = intent.extras
             if (extras != null) {
                 val dato1 = extras.getString("login")
                 val dato2 = extras.getString("contrasenya")
-                binding.Username.setText(dato1)
-                binding.Password.setText(dato2)
+                binding.Usernametext.setText(dato1)
+                binding.Passwordtext.setText(dato2)
             }
             // funcion intent
               val intent = intent
@@ -52,17 +52,17 @@ import com.example.appmusicgrupo1.utils.Resource
                       // Obtener los datos específicos que necesitas
                       val dato1 = extras.getString("login")
                       val dato2 = extras.getInt("contrasenya")
-                      binding.Username.setText(dato1)
-                      binding.Password.setText(dato2)
+                      binding.Usernametext.setText(dato1)
+                      binding.Passwordtext.setText(dato2)
                   }
-              }
+              }*/
 
             // el listener del boton
             binding.Login.setOnClickListener() {
 
                 viewModel.onLoginClick(
-                    binding.Username.text.toString(),
-                    binding.Password.text.toString()
+                    binding.Usernametext.text.toString(),
+                    binding.Passwordtext.text.toString()
                 )
             }
             binding.Register.setOnClickListener {
@@ -90,7 +90,10 @@ import com.example.appmusicgrupo1.utils.Resource
                             // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
                             Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
                             // TODO hacer lo que sea necesario en este caso cambiamos de actividad
-
+                            val intent = Intent(this, SongListActivity::class.java).apply {
+                            }
+                            startActivity(intent)
+                            finish()
                         }
                     }
                     Resource.Status.ERROR -> {

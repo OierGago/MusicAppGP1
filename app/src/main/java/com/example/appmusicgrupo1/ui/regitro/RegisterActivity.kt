@@ -34,22 +34,22 @@ class RegisterActivity : ComponentActivity(){
         setContentView(binding.root)
 
         // el listener del boton
-        binding.Register.setOnClickListener() {
-            if (binding.Password.text.toString() == binding.RepeatPassword.text.toString()) {
+        binding.btnRegister.setOnClickListener() {
+            if (binding.PasswordText.text.toString() == binding.RepeatPasswordText.text.toString()) {
                 viewModel.onRegisterClick(
-                    binding.username.text.toString(),
-                    binding.FirstName.text.toString(),
-                    binding.LastName.text.toString(),
-                    binding.Email.text.toString(),
-                    binding.Password.text.toString()
+                    binding.UsernameText.text.toString(),
+                    binding.NameText.text.toString(),
+                    binding.lastnametext.text.toString(),
+                    binding.mailtext.text.toString(),
+                    binding.PasswordText.text.toString()
                 )
             } else {
                 Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
-                binding.Password.text.clear()
-                binding.RepeatPassword.text.clear()
+                binding.PasswordText.setText(" ")
+                binding.RepeatPasswordText.setText(" ")
             }
         }
-        binding.Login.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java).apply {
                 // putExtra(EXTRA_MESSAGE, message)
             }
