@@ -77,7 +77,7 @@ class SongListActivity : ComponentActivity() {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     Log.i("Prueba", "Ha entrado")
-                    //viewModel.updateSongList()
+                    viewModel.updateSongList()
                     viewModel.getFavorites()
                 }
                 Resource.Status.ERROR -> {
