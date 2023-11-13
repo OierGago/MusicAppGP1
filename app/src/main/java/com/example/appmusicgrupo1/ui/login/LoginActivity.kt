@@ -4,6 +4,7 @@ package com.example.appmusicgrupo1.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -16,15 +17,6 @@ import com.example.appmusicgrupo1.ui.songList.SongListActivity
 import com.example.appmusicgrupo1.utils.Resource
 
 
-class LoginActivity : ComponentActivity() {
-
-    private val authenticationRepository = RemoteAuthenticationRepository();
-
-    private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(
-            authenticationRepository
-        )
-    }
 
 
     class LoginActivity : ComponentActivity() {
@@ -52,7 +44,7 @@ class LoginActivity : ComponentActivity() {
                 binding.Password.setText(dato2)
             }
             // funcion intent
-            /*  val intent = intent
+              val intent = intent
               if (intent != null) {
                   // Verificar si el Intent tiene datos extras
                   val extras = intent.extras
@@ -63,7 +55,7 @@ class LoginActivity : ComponentActivity() {
                       binding.Username.setText(dato1)
                       binding.Password.setText(dato2)
                   }
-              }*/
+              }
 
             // el listener del boton
             binding.Login.setOnClickListener() {
@@ -85,6 +77,8 @@ class LoginActivity : ComponentActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         it.data?.let { data ->
+                            Log.e("Antes de guardar" , "antes de guardar")
+                            Log.e("Despues de guardar", "Despues de guardar")
                             MyApp.userPreferences.saveAuthToken(
                                 data.id,
                                 data.contrasenya,
@@ -95,12 +89,7 @@ class LoginActivity : ComponentActivity() {
                             // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
                             Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
                             // TODO hacer lo que sea necesario en este caso cambiamos de actividad
-                            // val intent = Intent(this, EmployeesActivity::class.java).apply {
-                            // putExtra(EXTRA_MESSAGE, message)
-                            //}
-                            //  startActivity(intent)
-                            // si queremos quitar esta actividad...
-                            // finish()
+
                         }
                     }
                     Resource.Status.ERROR -> {
@@ -114,4 +103,3 @@ class LoginActivity : ComponentActivity() {
 
         }
     }
-}

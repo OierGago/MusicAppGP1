@@ -2,6 +2,7 @@ package com.example.appmusicgrupo1.ui.regitro
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -64,14 +65,14 @@ class RegisterActivity : ComponentActivity(){
                     it.data?.let {
                         // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
                         // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
-                        Toast.makeText(this, "registrado", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "registrado", Toast.LENGTH_SHORT).show()
                         // TODO hacer lo que sea necesario en este caso cambiamos de actividad
                         val intent = Intent(this, LoginActivity::class.java).apply {
-                            // putExtra(EXTRA_MESSAGE, message)
-                            putExtra("login", binding.username.text.toString())
-                            putExtra("contrasenya", binding.Password.text.toString())
+                        // putExtra(EXTRA_MESSAGE, message)
+                            Log.e("Prueba","a")
+                            // putExtra("login", "A")
+                            //putExtra("contrasenya", "B")
                         }
-
                         startActivity(intent)
                         // si queremos quitar esta actividad...
                         finish()
