@@ -78,13 +78,14 @@ import com.example.appmusicgrupo1.utils.Resource
                     Resource.Status.SUCCESS -> {
                         it.data?.let { data ->
                             Log.e("Antes de guardar" , "antes de guardar")
-                            Log.e("Despues de guardar", "Despues de guardar")
                             MyApp.userPreferences.saveAuthToken(
                                 data.id,
                                 data.contrasenya,
                                 data.login,
                                 data.accessToken
                             )
+                            Log.e("Despues de guardar", "Despues de guardar")
+
                             // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
                             // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
                             Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
