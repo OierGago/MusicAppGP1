@@ -70,8 +70,11 @@ class RegisterActivity : ComponentActivity(){
                         val intent = Intent(this, LoginActivity::class.java).apply {
                         // putExtra(EXTRA_MESSAGE, message)
                             Log.e("Prueba","a")
-                            // putExtra("login", "A")
-                            //putExtra("contrasenya", "B")
+                            var login = binding.UsernameText.text.toString()
+                            var contrasenya = binding.PasswordText.text.toString()
+                            putExtra("login", login)
+                            putExtra("contrasenya", contrasenya)
+
                         }
                         startActivity(intent)
                         // si queremos quitar esta actividad...
