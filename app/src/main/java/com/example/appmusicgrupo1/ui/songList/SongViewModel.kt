@@ -84,6 +84,7 @@ class SongViewModel(
         }
     }
     fun onFavoriteClickList(song: Song) {
+
         viewModelScope.launch {
             if (song.favorito) {
                 _created.value = deleteFromFavorite(2, song.id)
