@@ -59,10 +59,12 @@ class SongListActivity : ComponentActivity() {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     if  (!it.data.isNullOrEmpty()) {
-
+                        val data = it.data
+//                         songAdapter.submitList(it.data)
                         songAdapter.submitList(it.data)
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de canciones")
-                        songAdapter.submitSongList(it.data)
+                        songAdapter.submitSongList(data)
+                        songAdapter.filter(binding.search.text.toString(), esTitulo)
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -80,8 +82,10 @@ class SongListActivity : ComponentActivity() {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     Log.i("Prueba", "Ha entrado")
-                    viewModel.updateSongList()
-                    viewModel.getFavorites()
+                     viewModel.updateSongList()
+                     viewModel.getFavorites()
+                    songAdapter.filter(binding.search.text.toString(), esTitulo)
+                    FavoriteClickList()
                 }
                 Resource.Status.ERROR -> {
                     Log.i("Prueba", "error _created")
@@ -108,6 +112,13 @@ class SongListActivity : ComponentActivity() {
             Intent(Intent.ACTION_VIEW, webpage)
         }
         startActivity(webIntent)
+    }
+
+    private fun FavoriteClickList(){
+        Log.i("PruebaList", "Favorito")
+        val intent = Intent(this, SongListActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

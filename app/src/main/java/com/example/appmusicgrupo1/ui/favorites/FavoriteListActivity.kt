@@ -68,7 +68,8 @@ class FavoriteListActivity : ComponentActivity() {
                     if  (!it.data.isNullOrEmpty()) {
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
                         favoriteAdapter.submitList(it.data)
-                        favoriteAdapter.submitSongList(it.data)
+                        favoriteAdapter.submitSongList(it.data!!)
+                        favoriteAdapter.filter(binding.search.text.toString(), esTitulo)
                     } else if (it.data.isNullOrEmpty()){
                         favoriteAdapter.submitList(it.data)
                     }
@@ -90,7 +91,7 @@ class FavoriteListActivity : ComponentActivity() {
                 Resource.Status.SUCCESS -> {
                     Log.i("Prueba", "Ha entrado")
                     viewModel.updateSongList()
-
+                    favoriteAdapter.filter(binding.search.text.toString(), esTitulo)
                 }
                 Resource.Status.ERROR -> {
                     Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")
