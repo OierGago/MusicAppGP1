@@ -70,8 +70,11 @@ class RegisterActivity : ComponentActivity(){
                         val intent = Intent(this, LoginActivity::class.java).apply {
                         // putExtra(EXTRA_MESSAGE, message)
                             Log.e("Prueba","a")
-                            // putExtra("login", "A")
-                            //putExtra("contrasenya", "B")
+                            var login = binding.UsernameText.text.toString()
+                            var contrasenya = binding.PasswordText.text.toString()
+                            putExtra("login", login)
+                            putExtra("contrasenya", contrasenya)
+
                         }
                         startActivity(intent)
                         // si queremos quitar esta actividad...
@@ -79,7 +82,20 @@ class RegisterActivity : ComponentActivity(){
                     }
                 }
                 Resource.Status.ERROR -> {
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    val errorMessage = it.message ?: "Unknown error"
+                    if (errorMessage.contains("400")) {
+                        Toast.makeText(this, "Username o Password incorrecto", Toast.LENGTH_LONG).show()
+                    } else if(errorMessage.contains("401")) {
+                        Toast.makeText(this, "No autorizado", Toast.LENGTH_LONG).show()
+                        // Otro manejo de errores
+
+                    } else if(errorMessage.contains("404")) {
+                        Toast.makeText(this, "Error con el servidor", Toast.LENGTH_LONG).show()
+                        // Otro manejo de errores
+                    }else {
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                    }
+                   // Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
                 Resource.Status.LOADING -> {
                     // de momento

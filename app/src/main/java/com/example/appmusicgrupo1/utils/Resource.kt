@@ -1,6 +1,8 @@
 package com.example.appmusicgrupo1.utils
 
-data class Resource<out T>(val status: Status, var data: @UnsafeVariance T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+
+
     enum class Status {
         SUCCESS,
         ERROR,

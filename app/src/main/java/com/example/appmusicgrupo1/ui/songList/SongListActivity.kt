@@ -16,6 +16,7 @@ import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSourc
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
+import com.example.appmusicgrupo1.ui.login.LoginActivity
 import com.example.appmusicgrupo1.utils.Resource
 
 
@@ -51,6 +52,12 @@ class SongListActivity : ComponentActivity() {
 
         binding.search.addTextChangedListener(){
             songAdapter.filter(binding.search.text.toString(), esTitulo)
+        }
+
+        binding.imageView6.setOnClickListener(){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
 
