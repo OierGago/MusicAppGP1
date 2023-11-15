@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    //const val API_URI = "http://10.0.2.2:8080/api/"
+    const val API_URI = "http://10.0.2.2:8080/api/"
 
-    const val API_URI = "http://10.5.7.159:8081/api/"
+//    const val API_URI = "http://10.5.7.159:8081/api/"
     //const val API_URI = "http://10.5.7.129:8080/api/"
 
 
@@ -22,8 +22,8 @@ object RetrofitClient {
         val newRequest: Request = chain.request().newBuilder()
             .addHeader("Authorization", "Bearer $authToken")
             .build()
-        chain.proceed(newRequest)
-    }.build()
+            chain.proceed(newRequest)
+        }.build()
 
     val retrofitClient: Retrofit.Builder by lazy {
         Retrofit.Builder()
