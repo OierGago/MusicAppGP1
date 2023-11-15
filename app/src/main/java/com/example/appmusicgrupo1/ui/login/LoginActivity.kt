@@ -1,23 +1,19 @@
 package com.example.appmusicgrupo1.ui.login
 
 
-import android.accounts.NetworkErrorException
 import android.content.Intent
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.appmusicgrupo1.MyApp
-import com.example.appmusicgrupo1.UserPreferences
 import com.example.appmusicgrupo1.data.repository.remote.RemoteAuthenticationRepository
 import com.example.appmusicgrupo1.databinding.ActivityLoginBinding
 import com.example.appmusicgrupo1.ui.regitro.RegisterActivity
 import com.example.appmusicgrupo1.ui.songList.SongListActivity
 import com.example.appmusicgrupo1.utils.Resource
-import java.util.concurrent.TimeoutException
 
 
 class LoginActivity : ComponentActivity() {
@@ -89,6 +85,7 @@ class LoginActivity : ComponentActivity() {
                     Resource.Status.SUCCESS -> {
                         it.data?.let { data ->
                             Log.e("Antes de guardar" , "antes de guardar")
+                            MyApp.userPreferences.restartPreference()
 
                             if (binding.checkBox.isChecked){
                                 MyApp.userPreferences.saveAuthTokenWithPs(
@@ -113,6 +110,8 @@ class LoginActivity : ComponentActivity() {
                             Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
                             // TODO hacer lo que sea necesario en este caso cambiamos de actividad
                             val intent = Intent(this, SongListActivity::class.java).apply {
+
+                                Log.e("PruebaInicia", "Cargando las canciones")
                             }
                             startActivity(intent)
                             finish()

@@ -36,17 +36,16 @@ class RegisterActivity : ComponentActivity(){
         // cargamos el XML en la actividad
         val binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        fun vaciar(){
+            binding.UsernameText.setText("")
+            binding.NameText.setText("")
+            binding.lastnametext.setText("")
+            binding.mailtext.setText("")
+            binding.PasswordText.setText("")
+            binding.RepeatPasswordText.setText("")
+        }
         // el listener del boton
         binding.btnRegister.setOnClickListener() {
-            fun vaciar(){
-                binding.UsernameText.setText("")
-                binding.NameText.setText("")
-                binding.lastnametext.setText("")
-                binding.mailtext.setText("")
-                binding.PasswordText.setText("")
-                binding.RepeatPasswordText.setText("")
-            }
             if(binding.UsernameText.text.toString().length < 5){
                 Toast.makeText(this, "Username debe ser mas de 5 digitos", Toast.LENGTH_LONG).show()
                 vaciar()
@@ -80,6 +79,8 @@ class RegisterActivity : ComponentActivity(){
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     it.data?.let {
+                        MyApp.userPreferences.restartPreference()
+
                         // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
                         // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
                         //Toast.makeText(this, "registrado", Toast.LENGTH_SHORT).show()
@@ -101,6 +102,11 @@ class RegisterActivity : ComponentActivity(){
                 Resource.Status.ERROR -> {
 
                   // Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    val errorMessage = it.message ?: "Unknown error"
+                    if (errorMessage.contains("500")) {
+                        Toast.makeText(this, "Correo o usario son existentes", Toast.LENGTH_LONG).show()
+                        vaciar()
+                    }
                 }
                 Resource.Status.LOADING -> {
                     // de momento
