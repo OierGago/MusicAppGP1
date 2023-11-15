@@ -145,5 +145,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloRegister"
-        app:srcCompat="@drawable/sin_t_tulo" />
+        android:src="@drawable/sin_t_tulo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
