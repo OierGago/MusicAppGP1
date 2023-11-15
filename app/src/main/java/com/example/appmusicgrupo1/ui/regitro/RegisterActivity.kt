@@ -26,8 +26,12 @@ class RegisterActivity : ComponentActivity(){
     private val viewModel: RegisterViewModel by viewModels { RegisterViewModelFactory(
         authenticationRepository
     ) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
 
         // cargamos el XML en la actividad
         val binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -35,18 +39,31 @@ class RegisterActivity : ComponentActivity(){
 
         // el listener del boton
         binding.btnRegister.setOnClickListener() {
-            if (binding.PasswordText.text.toString() == binding.RepeatPasswordText.text.toString()) {
-                viewModel.onRegisterClick(
-                    binding.UsernameText.text.toString(),
-                    binding.NameText.text.toString(),
-                    binding.lastnametext.text.toString(),
-                    binding.mailtext.text.toString(),
-                    binding.PasswordText.text.toString()
-                )
-            } else {
-                Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
-                binding.PasswordText.setText(" ")
-                binding.RepeatPasswordText.setText(" ")
+            fun vaciar(){
+                binding.UsernameText.setText("")
+                binding.NameText.setText("")
+                binding.lastnametext.setText("")
+                binding.mailtext.setText("")
+                binding.PasswordText.setText("")
+                binding.RepeatPasswordText.setText("")
+            }
+            if(binding.UsernameText.text.toString().length < 5){
+                Toast.makeText(this, "Username debe ser mas de 5 digitos", Toast.LENGTH_LONG).show()
+                vaciar()
+            } else{
+                if (binding.PasswordText.text.toString() == binding.RepeatPasswordText.text.toString()) {
+                    viewModel.onRegisterClick(
+                        binding.UsernameText.text.toString(),
+                        binding.NameText.text.toString(),
+                        binding.lastnametext.text.toString(),
+                        binding.mailtext.text.toString(),
+                        binding.PasswordText.text.toString()
+                    )
+                } else {
+                    Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
+                    binding.PasswordText.setText(" ")
+                    binding.RepeatPasswordText.setText(" ")
+                }
             }
         }
         binding.btnLogin.setOnClickListener {
@@ -82,20 +99,8 @@ class RegisterActivity : ComponentActivity(){
                     }
                 }
                 Resource.Status.ERROR -> {
-                    val errorMessage = it.message ?: "Unknown error"
-                    if (errorMessage.contains("400")) {
-                        Toast.makeText(this, "Username o Password incorrecto", Toast.LENGTH_LONG).show()
-                    } else if(errorMessage.contains("401")) {
-                        Toast.makeText(this, "No autorizado", Toast.LENGTH_LONG).show()
-                        // Otro manejo de errores
 
-                    } else if(errorMessage.contains("404")) {
-                        Toast.makeText(this, "Error con el servidor", Toast.LENGTH_LONG).show()
-                        // Otro manejo de errores
-                    }else {
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-                    }
-                   // Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                  // Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
                 Resource.Status.LOADING -> {
                     // de momento
@@ -103,8 +108,5 @@ class RegisterActivity : ComponentActivity(){
             }
         })
 
-
-
     }
-
 }
