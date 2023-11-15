@@ -65,11 +65,10 @@ class SongViewModel(
                 }
             }
         }
-
     }
     fun getFavorites() {
         viewModelScope.launch {
-            val repoResponseFav = MyApp.userPreferences.fetchAuthId()?.let { getFavoriteList(it) }
+            val repoResponseFav = getFavoriteList()
             _itemsFav.value = repoResponseFav
 
             obtenerFavoritos()
@@ -88,8 +87,7 @@ class SongViewModel(
 
         viewModelScope.launch {
             if (song.favorito) {
-                _created.value =
-                    MyApp.userPreferences.fetchAuthId()?.let { deleteFromFavorite(it, song.id) }
+                _created.value =deleteFromFavorite(song.id)
                 song.favorito = false
 
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
@@ -98,24 +96,14 @@ class SongViewModel(
                 _created.value = favorite?.let { addToFavorite(it) }
                 song.favorito = true
 
-
-                // _items.value = items.
-//                val newItems = mutableListOf<Song>()
-//                for (song in items.value?.data!!) {
-//                    song.favorito = true
-//                    newItems.add(song)
-//                }
-//                val newItemsResource = Resource.success(newItems)
-//                _items.value = newItemsResource
-
                 Log.i("PRueba", "Cancion " + song.id + " añadida")
             }
         }
     }
 
-    suspend fun getFavoriteList(id: Int): Resource<List<Song>> {
+    suspend fun getFavoriteList(): Resource<List<Song>> {
         return withContext(Dispatchers.IO){
-            favoriteRespository.getFavorites(id)
+            favoriteRespository.getFavorites()
         }
     }
 
@@ -126,9 +114,9 @@ class SongViewModel(
         }
     }
 
-    suspend fun deleteFromFavorite(idUser: Int, idSong : Int) : Resource<Integer> {
+    suspend fun deleteFromFavorite(idSong : Int) : Resource<Integer> {
         return withContext(Dispatchers.IO){
-            favoriteRespository.deleteFromFavorite(idUser, idSong)
+            favoriteRespository.deleteFromFavorite(idSong)
         }
     }
 

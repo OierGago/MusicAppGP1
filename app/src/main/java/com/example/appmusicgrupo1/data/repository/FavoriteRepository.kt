@@ -8,9 +8,9 @@ import retrofit2.http.Body
 import retrofit2.http.Path
 
 interface FavoriteRepository {
-    suspend fun getFavorites(id: Int) : Resource<List<Song>>
+    suspend fun getFavorites() : Resource<List<Song>>
 
-    suspend fun deleteFromFavorite(idUsuario: Int,idSong : Int): Resource<Integer>
+    suspend fun deleteFromFavorite(idSong : Int): Resource<Integer>
 
     suspend fun addFavorite(favorite: Favorite): Resource<Integer>
 }

@@ -31,11 +31,11 @@ interface APIInterface {
     @DELETE("song/{id}")
     suspend fun deleteSong(@Path("id") id : Int): Response<Integer>
 
-    @GET("favorite/{id}")
-    suspend fun getFavorites(@Path("id") id : Int): Response<List<Song>>
+    @GET("favorite")
+    suspend fun getFavorites(): Response<List<Song>>
 
-    @DELETE("favorite/{idUser}/{idSong}")
-    suspend fun deleteFromFavorite(@Path("idUser") idUser: Int,@Path("idSong") idSong : Int): Response<Integer>
+    @DELETE("favorite/{idSong}")
+    suspend fun deleteFromFavorite(@Path("idSong") idSong : Int): Response<Integer>
 
     @POST("favorite")
     suspend fun addFavorite(@Body favorite: Favorite): Response<Integer>
