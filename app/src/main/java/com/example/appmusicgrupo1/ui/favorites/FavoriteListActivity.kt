@@ -16,12 +16,12 @@ import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSourc
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityFavoriteListBinding
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
-import com.example.appmusicgrupo1.databinding.UserMenuBinding
 import com.example.appmusicgrupo1.ui.login.LoginActivity
 import com.example.appmusicgrupo1.ui.songList.SongAdapter
 import com.example.appmusicgrupo1.ui.songList.SongListActivity
 import com.example.appmusicgrupo1.ui.songList.SongViewModel
 import com.example.appmusicgrupo1.ui.songList.SongViewModelFactory
+import com.example.appmusicgrupo1.ui.userMenu.UserMenuActivity
 import com.example.appmusicgrupo1.utils.Resource
 
 class FavoriteListActivity : ComponentActivity() {
@@ -67,7 +67,7 @@ class FavoriteListActivity : ComponentActivity() {
             finish()
         }
         binding.imageView7.setOnClickListener(){
-            val intent = Intent(this, UserMenuBinding::class.java)
+            val intent = Intent(this, UserMenuActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -120,6 +120,8 @@ class FavoriteListActivity : ComponentActivity() {
             startActivity(intent)
             finish()
         }
+
+
 
 
 

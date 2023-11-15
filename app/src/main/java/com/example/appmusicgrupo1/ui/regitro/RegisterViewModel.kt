@@ -1,6 +1,5 @@
 package com.example.appmusicgrupo1.ui.regitro
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.appmusicgrupo1.data.repository.AuthenticationRepository
-import com.example.appmusicgrupo1.data.repository.UserRequest
-import com.example.appmusicgrupo1.ui.login.LoginViewModel
+import com.example.appmusicgrupo1.data.UserRequest
 import com.example.appmusicgrupo1.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.log
 
 class RegisterViewModel(  private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {

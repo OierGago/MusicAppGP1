@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.appmusicgrupo1.data.AuthenticationResponse
 import com.example.appmusicgrupo1.data.repository.AuthenticationRepository
-import com.example.appmusicgrupo1.data.repository.AuthenticationRequest
+import com.example.appmusicgrupo1.data.AuthenticationRequest
 import com.example.appmusicgrupo1.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

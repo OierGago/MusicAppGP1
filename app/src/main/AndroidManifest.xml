@@ -35,6 +35,8 @@
 
         <activity android:name=".ui.favorites.FavoriteListActivity"></activity>
 
+        <activity android:name=".ui.userMenu.UserMenuActivity"></activity>
+
 
     </application>
 

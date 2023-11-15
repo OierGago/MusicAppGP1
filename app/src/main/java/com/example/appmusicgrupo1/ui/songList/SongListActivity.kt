@@ -17,6 +17,7 @@ import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
 import com.example.appmusicgrupo1.ui.favorites.FavoriteListActivity
 import com.example.appmusicgrupo1.ui.login.LoginActivity
+import com.example.appmusicgrupo1.ui.userMenu.UserMenuActivity
 import com.example.appmusicgrupo1.utils.Resource
 
 
@@ -105,6 +106,12 @@ class SongListActivity : ComponentActivity() {
 
         binding.btnFavoritos.setOnClickListener() {
             val intent = Intent(this, FavoriteListActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.imageView7.setOnClickListener(){
+            val intent = Intent(this, UserMenuActivity::class.java)
             startActivity(intent)
             finish()
         }

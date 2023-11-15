@@ -2,8 +2,8 @@ package com.example.appmusicgrupo1.data.repository.remote
 
 import com.example.appmusicgrupo1.data.AuthenticationResponse
 import com.example.appmusicgrupo1.data.repository.AuthenticationRepository
-import com.example.appmusicgrupo1.data.repository.AuthenticationRequest
-import com.example.appmusicgrupo1.data.repository.UserRequest
+import com.example.appmusicgrupo1.data.AuthenticationRequest
+import com.example.appmusicgrupo1.data.UserRequest
 import com.example.appmusicgrupo1.utils.Resource
 
 class RemoteAuthenticationRepository :  BaseDataSource(), AuthenticationRepository {
@@ -13,4 +13,6 @@ class RemoteAuthenticationRepository :  BaseDataSource(), AuthenticationReposito
     override suspend fun signup(userRequest: UserRequest) : Resource<Int> = getResult {
         RetrofitClient.apiInterface.signup(userRequest)
     }
+
+
 }
