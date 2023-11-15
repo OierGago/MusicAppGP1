@@ -49,6 +49,7 @@ class SongViewModel(
     }
 
     fun obtenerFavoritos() {
+
         if (_items.value != null && _itemsFav.value != null) {
             val nuevaLista = arrayListOf<Song>()
             for (itemsList in _items.value!!.data!!){
@@ -96,6 +97,9 @@ class SongViewModel(
 
                 Log.i("PRueba", "Cancion " + song.id + " añadida")
             }
+
+
+            _items.value = _items.value?.data?.let { Resource.success(it.toMutableList()) }
         }
     }
 
