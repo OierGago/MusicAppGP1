@@ -39,16 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="275dp"
-        android:layout_height="174dp"
-        app:layout_constraintBottom_toTopOf="@+id/Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloRegister"
-        app:srcCompat="@drawable/sin_t_tulo" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Username"
         android:layout_width="328dp"
@@ -144,4 +134,14 @@
             android:layout_height="wrap_content"
             android:hint="Repite Contraseña" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="240dp"
+        android:layout_height="181dp"
+        app:layout_constraintBottom_toTopOf="@+id/Username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloRegister"
+        app:srcCompat="@drawable/sin_t_tulo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
