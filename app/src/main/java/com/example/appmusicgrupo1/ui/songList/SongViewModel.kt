@@ -54,16 +54,14 @@ class SongViewModel(
             for (itemsList in _items.value!!.data!!){
                 nuevaLista.add(itemsList)
             }
-            //Log.i("PruebaArray", nuevaLista.toString())
-            for (itemFav in _itemsFav.value!!.data!!) {
+           for (itemFav in _itemsFav.value!!.data!!) {
                 itemFav.favorito = true
                 for (itemSong in _items.value!!.data!!) {
                     if (itemFav.id == itemSong.id) {
-//                        Log.i("Prueba", "va2")
                         itemSong.favorito = true
                     }
                 }
-            }
+           }
         }
     }
     fun getFavorites() {
@@ -92,8 +90,8 @@ class SongViewModel(
 
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
             } else {
-                var favorite = MyApp.userPreferences.fetchAuthId()?.let { Favorite(it, song.id) }
-                _created.value = favorite?.let { addToFavorite(it) }
+                var favorite = Favorite(0, song.id)
+                _created.value = addToFavorite(favorite)
                 song.favorito = true
 
                 Log.i("PRueba", "Cancion " + song.id + " añadida")
