@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.service.autofill.UserData
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appmusicgrupo1.MyApp
@@ -39,20 +40,30 @@ class UserMenuActivity : AppCompatActivity() {
 
         binding.changePassword.setOnClickListener(){
 
-            if(binding.passwordInput.text.toString() == binding.repeatPasswordInput.text.toString()){
-                Log.i("pruebacontraseña","4185")
+            if(binding.passwordInput.text.toString() == binding.repeatPasswordInput.text.toString() &&
+                !(binding.passwordInput.text.toString().isNullOrEmpty()) &&
+                binding.passwordInput.text.toString().length>=5 &&
+                binding.oldPasswordInput.text.toString() == MyApp.userPreferences.fetchAuthPassword().toString()
+                ){
                 var user : PassChange = PassChange(
                     binding.oldPasswordInput.text.toString(),
                     binding.passwordInput.text.toString()
                 )
 
-                    Log.i("pruebacontraseña","cojones")
-
                 if (user != null) {
-                    Log.i("pruebacontraseña","coqwejones")
                     viewModel.changeUserPass(user)
                 }
+                val intent = Intent(this, SongListActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else if(binding.oldPasswordInput.text.toString() != MyApp.userPreferences.fetchAuthPassword().toString()){
+                Toast.makeText(this, "Contraseña vieja incorrecta", Toast.LENGTH_SHORT).show()
+            } else if(binding.passwordInput.text.toString().length<5){
+                Toast.makeText(this, "Las contraseñas deben tener una longitud de 5 o más caracteres ", Toast.LENGTH_SHORT).show()
+            } else{
+                Toast.makeText(this, "Las contraseñas deben estar iguales", Toast.LENGTH_SHORT).show()
             }
+
         }
 
         binding.imageView.setOnClickListener(){

@@ -107,7 +107,7 @@ class LoginActivity : ComponentActivity() {
 
                             // TODO podriamos guardar el nombre del usuario tambien e incluso la pass en el sharedPreferences... hacer sus funciones...
                             // TODO recordad que no esta cifrado esto es solo a modo prueba. Tampoco se recomienda guardar contraseñas...
-                            Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(this, "login", Toast.LENGTH_SHORT).show()
                             // TODO hacer lo que sea necesario en este caso cambiamos de actividad
                             val intent = Intent(this, SongListActivity::class.java).apply {
 

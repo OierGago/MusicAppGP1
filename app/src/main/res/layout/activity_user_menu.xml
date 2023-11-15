@@ -24,7 +24,7 @@
         android:background="@drawable/stylo_borde_editext"
         android:ems="10"
         android:hint="New Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/repeatPasswordInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:background="@drawable/stylo_borde_editext"
         android:ems="10"
         android:hint="Repeat Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/changePassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +50,12 @@
         android:background="@drawable/stylo_borde_editext"
         android:ems="10"
         android:hint="Old Password"
-        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/passwordInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        android:inputType="textPassword"
+        />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
