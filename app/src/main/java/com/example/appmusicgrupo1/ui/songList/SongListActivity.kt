@@ -92,7 +92,6 @@ class SongListActivity : ComponentActivity() {
 //                     viewModel.updateSongList()
 //                     viewModel.getFavorites()
                     songAdapter.filter(binding.search.text.toString(), esTitulo)
-                    FavoriteClickList()
                 }
                 Resource.Status.ERROR -> {
                     Log.i("Prueba", "error _created")
@@ -120,14 +119,6 @@ class SongListActivity : ComponentActivity() {
         }
         startActivity(webIntent)
     }
-
-    private fun FavoriteClickList(){
-        Log.i("PruebaList", "Favorito")
-//        val intent = Intent(this, SongListActivity::class.java)
-//        startActivity(intent)
-//        finish()
-    }
-
 
 
 }
