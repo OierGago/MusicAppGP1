@@ -34,6 +34,8 @@
         <activity android:name=".ui.songList.SongListActivity"></activity>
 
         <activity android:name=".ui.favorites.FavoriteListActivity"></activity>
+
+
     </application>
 
 </manifest>
