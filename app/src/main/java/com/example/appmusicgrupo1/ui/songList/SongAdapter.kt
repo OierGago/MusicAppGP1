@@ -28,8 +28,10 @@ class SongAdapter (
 
 
     // Método para establecer la lista completa de canciones y actualizar la lista filtrada
-    fun submitSongList(songs: List<Song>) {
-        songListFull = songs
+    fun submitSongList(songs: List<Song>?) {
+        if (songs != null) {
+            songListFull = songs
+        }
         filter("",  true) // Al recibir una nueva lista de canciones, mostramos todas las canciones
     }
 
@@ -80,10 +82,10 @@ class SongAdapter (
                         .load(thumbnailUrl)
                         .into(binding.songImage)
                     if(song.favorito) {
-                        Log.i("PruebaCambio", "Cambiado a favorito")
+                        //Log.i("PruebaCambio", "Cambiado a favorito")
                         cambioFavorito()
                     } else {
-                        Log.i("PruebaCambio", "Cambiado a no favorito")
+                        //Log.i("PruebaCambio", "Cambiado a no favorito")
                         cambioNoFavorito()
                         //binding.songFavorite.setImageResource(R.drawable.nofavorite);
 

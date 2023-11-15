@@ -8,6 +8,7 @@ import com.example.appmusicgrupo1.data.repository.SongRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.appmusicgrupo1.MyApp
 import com.example.appmusicgrupo1.R
 import com.example.appmusicgrupo1.data.Favorite
 import com.example.appmusicgrupo1.data.Song
@@ -30,7 +31,7 @@ class SongViewModel(
     private val songRepository: SongRepository,
     private val favoriteRespository: FavoriteRepository
 ) : ViewModel(){
-    private val _items = MutableLiveData<Resource<List<Song>>>()
+    private var _items = MutableLiveData<Resource<List<Song>>>()
 
     val items : LiveData<Resource<List<Song>>> get() = _items
 
@@ -53,7 +54,7 @@ class SongViewModel(
             for (itemsList in _items.value!!.data!!){
                 nuevaLista.add(itemsList)
             }
-            Log.i("PruebaArray", nuevaLista.toString())
+            //Log.i("PruebaArray", nuevaLista.toString())
             for (itemFav in _itemsFav.value!!.data!!) {
                 itemFav.favorito = true
                 for (itemSong in _items.value!!.data!!) {
@@ -68,7 +69,7 @@ class SongViewModel(
     }
     fun getFavorites() {
         viewModelScope.launch {
-            val repoResponseFav = getFavoriteList(2)
+            val repoResponseFav = MyApp.userPreferences.fetchAuthId()?.let { getFavoriteList(it) }
             _itemsFav.value = repoResponseFav
 
             obtenerFavoritos()
@@ -87,14 +88,26 @@ class SongViewModel(
 
         viewModelScope.launch {
             if (song.favorito) {
-                _created.value = deleteFromFavorite(2, song.id)
+                _created.value =
+                    MyApp.userPreferences.fetchAuthId()?.let { deleteFromFavorite(it, song.id) }
                 song.favorito = false
 
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
             } else {
-                var favorite = Favorite(2, song.id)
-                _created.value = addToFavorite(favorite)
+                var favorite = MyApp.userPreferences.fetchAuthId()?.let { Favorite(it, song.id) }
+                _created.value = favorite?.let { addToFavorite(it) }
                 song.favorito = true
+
+
+                // _items.value = items.
+//                val newItems = mutableListOf<Song>()
+//                for (song in items.value?.data!!) {
+//                    song.favorito = true
+//                    newItems.add(song)
+//                }
+//                val newItemsResource = Resource.success(newItems)
+//                _items.value = newItemsResource
+
                 Log.i("PRueba", "Cancion " + song.id + " añadida")
             }
         }
