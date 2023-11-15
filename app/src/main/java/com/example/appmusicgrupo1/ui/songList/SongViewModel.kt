@@ -54,16 +54,14 @@ class SongViewModel(
             for (itemsList in _items.value!!.data!!){
                 nuevaLista.add(itemsList)
             }
-            //Log.i("PruebaArray", nuevaLista.toString())
-            for (itemFav in _itemsFav.value!!.data!!) {
+           for (itemFav in _itemsFav.value!!.data!!) {
                 itemFav.favorito = true
                 for (itemSong in _items.value!!.data!!) {
                     if (itemFav.id == itemSong.id) {
-//                        Log.i("Prueba", "va2")
                         itemSong.favorito = true
                     }
                 }
-            }
+           }
         }
     }
     fun getFavorites() {
