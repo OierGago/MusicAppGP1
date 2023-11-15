@@ -92,8 +92,8 @@ class SongViewModel(
 
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
             } else {
-                var favorite = MyApp.userPreferences.fetchAuthId()?.let { Favorite(it, song.id) }
-                _created.value = favorite?.let { addToFavorite(it) }
+                var favorite = Favorite(0, song.id)
+                _created.value = addToFavorite(favorite)
                 song.favorito = true
 
                 Log.i("PRueba", "Cancion " + song.id + " añadida")
