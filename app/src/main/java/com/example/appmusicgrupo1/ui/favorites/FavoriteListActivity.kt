@@ -16,6 +16,8 @@ import com.example.appmusicgrupo1.data.repository.remote.RemoteFavoriteDataSourc
 import com.example.appmusicgrupo1.data.repository.remote.RemoteSongDataSource
 import com.example.appmusicgrupo1.databinding.ActivityFavoriteListBinding
 import com.example.appmusicgrupo1.databinding.ActivityMusicListBinding
+import com.example.appmusicgrupo1.databinding.UserMenuBinding
+import com.example.appmusicgrupo1.ui.login.LoginActivity
 import com.example.appmusicgrupo1.ui.songList.SongAdapter
 import com.example.appmusicgrupo1.ui.songList.SongListActivity
 import com.example.appmusicgrupo1.ui.songList.SongViewModel
@@ -59,6 +61,16 @@ class FavoriteListActivity : ComponentActivity() {
         binding.search.addTextChangedListener(){
             favoriteAdapter.filter(binding.search.text.toString(), esTitulo)
         }
+        binding.imageView6.setOnClickListener(){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        binding.imageView7.setOnClickListener(){
+            val intent = Intent(this, UserMenuBinding::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         viewModel.items.observe(this, Observer {
@@ -68,7 +80,8 @@ class FavoriteListActivity : ComponentActivity() {
                     if  (!it.data.isNullOrEmpty()) {
                         Log.i("Prueba", "Ha ocurrido un cambio en la lista de cancwdiones")
                         favoriteAdapter.submitList(it.data)
-                        favoriteAdapter.submitSongList(it.data)
+                        favoriteAdapter.submitSongList(it.data!!)
+                        favoriteAdapter.filter(binding.search.text.toString(), esTitulo)
                     } else if (it.data.isNullOrEmpty()){
                         favoriteAdapter.submitList(it.data)
                     }
@@ -90,7 +103,7 @@ class FavoriteListActivity : ComponentActivity() {
                 Resource.Status.SUCCESS -> {
                     Log.i("Prueba", "Ha entrado")
                     viewModel.updateSongList()
-
+                    favoriteAdapter.filter(binding.search.text.toString(), esTitulo)
                 }
                 Resource.Status.ERROR -> {
                     Log.i("Prueba", "Ha ocurrido un error en la lista de canciones")

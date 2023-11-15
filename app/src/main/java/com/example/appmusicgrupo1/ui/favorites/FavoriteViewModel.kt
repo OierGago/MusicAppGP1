@@ -8,6 +8,7 @@ import com.example.appmusicgrupo1.data.repository.SongRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.appmusicgrupo1.MyApp
 import com.example.appmusicgrupo1.data.Favorite
 import com.example.appmusicgrupo1.data.Song
 import com.example.appmusicgrupo1.data.repository.FavoriteRepository
@@ -48,17 +49,17 @@ class FavoriteViewModel(
         }
     }
 
-    suspend fun getSongFromRepository() : Resource<List<Song>>{
+    suspend fun getSongFromRepository() : Resource<List<Song>>?{
         return withContext(Dispatchers.IO){
-            favoriteRepository.getFavorites(2)
-
+            MyApp.userPreferences.fetchAuthId()?.let { favoriteRepository.getFavorites(it) }
         }
     }
 
     fun onFavoriteClickList(song: Song) : Boolean{
         viewModelScope.launch {
 
-                _created.value = deleteFromFavorite(2, song.id)
+                _created.value =
+                    MyApp.userPreferences.fetchAuthId()?.let { deleteFromFavorite(it, song.id) }
 
                 Log.i("PRueba", "Cancion " + song.id + " borrada")
 
@@ -76,12 +77,6 @@ class FavoriteViewModel(
     suspend fun deleteFromFavorite(idUser: Int, idSong : Int) : Resource<Integer> {
         return withContext(Dispatchers.IO){
             favoriteRepository.deleteFromFavorite(idUser, idSong)
-        }
-    }
-
-    suspend fun addToFavorite(favorite: Favorite) : Resource<Integer>{
-        return withContext(Dispatchers.IO){
-            favoriteRepository.addFavorite(favorite)
         }
     }
 
